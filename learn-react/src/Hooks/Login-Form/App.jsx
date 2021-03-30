@@ -7,12 +7,17 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newEntry = {
-      email: email,
-      password: password,
-    };
-    setAllEntry([...allEntry, newEntry]);
-    // alert("form submission successfull");
+    if (email && password) {
+      const newEntry = {
+        email,
+        password,
+      };
+      setAllEntry([...allEntry, newEntry]);
+      setEmail("");
+      setPassword("");
+    } else {
+      alert("please fill the data");
+    }
   };
   return (
     <>
@@ -61,7 +66,7 @@ const App = () => {
         <div className="col-7 mx-auto mt-3">
           {allEntry.map((user, index) => {
             return (
-              <div className="card bg-primary text-light">
+              <div key={index} className="card bg-primary text-light">
                 <div className="card-body d-flex justify-content-between">
                   <p>Email: {user.email} </p>
                   <p>Password: {user.password} </p>
